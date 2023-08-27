@@ -99,33 +99,40 @@ async function initialize() {
         const title = document.createElement("h3");
         const fact = document.createElement("p");
 
-        title.innerHTML = dino.species;
-        fact.innerHTML = (_ => {
-            let result = "";
-            const randomise = getRandomInt(6);
+        if (dino.species === "human") {
+			title.innerHTML = humanData.name;
+		} else if (dino.species === "Pigeon") {
+			title.innerHTML = dino.species;
+			fact.innerHTML = dino.fact;
+		} else {
+			title.innerHTML = dino.species;
+			fact.innerHTML = (_=> {
+				let result = "";
+				const randomise = getRandomInt(8);
 
-            switch (randomise) {
-                case 1:
-                    result = dino.compareHeight(humanData.height);
-                    break;
-                case 2:
-                    result = dino.compareWeight(humanData.weight);
-                    break;
-                case 3:
-                    result = dino.compareDiet(humanData.diet);
-                    break;
-                case 4:
-                    result = `The ${dino.species} lived in what is now ${dino.where}.`;
-                    break;
-                case 5:
-                    result = `The ${dino.species} was found in the ${dino.when}.`;
-                    break;
-                default:
-                    result = dino.fact;
-                    break;
-            }
-            return result;
-        })();
+				switch (randomise) {
+					case 1:
+						result = dino.compareHeight(humanData.height);
+						break;
+					case 2:
+						result = dino.compareWeight(humanData.weight);
+						break;
+					case 3:
+						result = dino.compareDiet(humanData.diet);
+						break;
+					case 4:
+						result = `The ${dino.species} lived in what is now ${dino.where}.`;
+						break;
+					case 5:
+						result = `The ${dino.species} was found in the ${dino.when}.`;
+						break;
+					default:
+						result = dino.fact;
+						break;
+				}
+				return result;
+			})();
+		}
         divTag.appendChild(title);
         divTag.appendChild(img);
         divTag.appendChild(fact);
